@@ -1,0 +1,6 @@
+@import 'bootstrap/settings';
+
+:local(.searchNavigation) {
+  margin-bottom: floor(($grid-gutter-width / 2));
+  margin-top: floor(($grid-gutter-width / 2));
+}

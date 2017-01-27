@@ -1,0 +1,13 @@
+@import 'bootstrap/settings';
+
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins/panels';
+
+.panel-eventsearchheader {
+  @include panel-variant($unimi-bar-bg,
+                         $text-color,
+                         lighten($unimi-bar-bg, 5%),
+                         $unimi-bar-bord-color);
+  .panel-title {
+    font-size: $font-size-h4;  // slightly smaller than the default
+  }
+}

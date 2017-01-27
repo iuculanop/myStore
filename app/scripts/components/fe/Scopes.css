@@ -1,0 +1,36 @@
+:local(.scitech) {
+  background-color: #01AC4E !important;
+  color: white
+}
+
+:local(.giupoecsoc) {
+  background-color: #0065B3 !important;
+  color: white;
+}
+
+:local(.sanit) {
+  background-color: #AF2228 !important;
+  color: white;
+}
+
+:local(.umani) {
+  background-color: #FF9118 !important;
+  color: rgb(83, 83, 84);
+}
+
+:local(.default) {
+  background-color: #D6D6CA !important;
+  color: rgb(83, 83, 84);
+}
+
+/*
+   Colors taken from
+   http://www.unimi.it/img/flag_scegli-la-statale.png
+   #FF9118
+   #D6D6CA
+   #EE2D24
+   #AF2228
+   #0065B3
+   #A3CD39
+   #01AC4E
+*/

@@ -1,0 +1,6 @@
+#Ignore those files
+*~
+npm-debug.log
+#Ignore those folders
+node_modules
+dist

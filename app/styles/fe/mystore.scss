@@ -1,0 +1,60 @@
+// Put your style declarations here
+@import 'common-variables';
+
+.row-form-separator {
+  margin-bottom: 10px; 
+}
+
+.mg5 {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.profile-photo {
+  height: 160px;
+}
+
+.new_rule {
+  margin-right: 10px;
+}
+
+.display-condition {
+  margin-left: 10px;
+}
+
+.box-nested {
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.scrollableX {
+  overflow-x: scroll;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: color .3s;
+}
+
+.trigger:hover {
+  color: #108ee9;
+}
+
+.logo {
+  height: 32px;
+  background: #333;
+  border-radius: 6px;
+  margin: 16px;
+}
+
+.ant-layout-sider-collapsed .anticon {
+  font-size: 16px;
+}
+
+.ant-layout-sider-collapsed .nav-text {
+  display: none;
+}
