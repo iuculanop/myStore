@@ -1,6 +1,14 @@
 // Put your style declarations here
 @import 'common-variables';
 
+// TODO: capire come settare il body ad altezza 100%
+html{
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
 .row-form-separator {
   margin-bottom: 10px; 
 }
