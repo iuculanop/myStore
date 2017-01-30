@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash/fp';
 
 // Route definition facilities (from react-router)
 import Route from 'react-router/lib/Route';
@@ -6,16 +7,20 @@ import Route from 'react-router/lib/Route';
 
 // Apps
 import { FrontendApp } from 'apps/FrontendApp.jsx';
-import BoxesApp from 'apps/BoxesApp.jsx';
+import { BoxesApp, onEnterBoxesApp } from 'apps/BoxesApp.jsx';
 
 // import { EventDetailApp, onEnterEventDetailApp } from 'apps/EventDetailApp.jsx';
 
 // Use _.partial to externally define hooks that dispatch actions (injecting the store)
 
-function routes() {
+function routes(store) {
   return (
     <Route path="/" component={FrontendApp}>
-      <Route path="boxes" component={BoxesApp} />
+      <Route
+        path="boxes"
+        component={BoxesApp}
+        onEnter={_.partial(onEnterBoxesApp, [store])}
+      />
     </Route>
   );
 }

@@ -1,39 +1,82 @@
-import { retrieveEvent, retrieveEvents } from 'util/RetrieveEvents.jsx';
+// import { retrieveEvent, retrieveEvents } from 'util/RetrieveEvents.jsx';
+import { retrieveBoxes, insertBox } from 'util/Ajax/boxes.jsx';
 
+/* servira in futuro quando si fara la ricerca su dati gia caricati
 export const SEARCH_EVENTS = 'SEARCH_EVENTS';
 export const SEARCH_EVENTS_COMPLETED = 'SEARCH_EVENTS_COMPLETED';
 export const SEARCH_EVENTS_FETCH_COMPLETED = 'SEARCH_EVENTS_FETCH_COMPLETED';
+ */
 
-export const FETCH_EVENT = 'FETCH_EVENT';
-export const FETCH_EVENT_COMPLETED = 'FETCH_EVENT_COMPLETED';
+export const FETCH_BOXES = 'FETCH_BOXES';
+export const FETCH_BOXES_COMPLETED = 'FETCH_BOXES_COMPLETED';
 
-let nextTempConditionId = 0;
+export const FETCH_BOX = 'FETCH_BOX';
+export const FETCH_BOX_COMPLETED = 'FETCH_BOX_COMPLETED';
 
-export const PUSH_TEMPCONDITION = 'PUSH_TEMPCONDITION';
+export const CREATE_BOX = 'CREATE_BOX';
+export const CREATE_BOX_COMPLETED = 'CREATE_BOX_COMPLETED';
 
-export const LIST_TEMPCONDITIONS = 'LIST_TEMPCONDITIONS';
-
-export function pushTempCondition(condition) {
+export function fetchingBoxes() {
   return {
-    type: PUSH_TEMPCONDITION,
-    payload: condition,
-    id: nextTempConditionId++,
+    type: FETCH_BOXES,
   };
 }
 
-export function listTempConditions(conditions) {
+export function fetchingBoxesCompleted(boxes, error = false) {
   return {
-    type: LIST_TEMPCONDITIONS,
-    payload: conditions,
+    type: FETCH_BOXES_COMPLETED,
+    payload: boxes,
+    error,
   };
 }
 
-export function pushTempConditionStore(condition) {
+export function fetchBoxes() {
   return (dispatch) => {
-    dispatch(pushTempCondition(condition)); // inform we are pushing in store
+    dispatch(fetchingBoxes());
+    return retrieveBoxes()
+      .then(response => {
+        dispatch(fetchingBoxesCompleted(response));
+      }, eventerror => {
+        dispatch(fetchingBoxesCompleted({ error: eventerror }, true));
+        const error = new Error('Impossible to fetch Boxes' +
+                                `Cause: ${eventerror.message || eventerror}`);
+        error.error = eventerror;
+        throw error;
+      });
   };
 }
 
+export function creatingBox() {
+  return {
+    type: CREATE_BOX,
+  };
+}
+
+export function creatingBoxCompleted(box, error = false) {
+  return {
+    type: CREATE_BOX_COMPLETED,
+    payload: box,
+    error,
+  };
+}
+
+export function createBox(box) {
+  return (dispatch) => {
+    dispatch(creatingBox());
+    return insertBox(box)
+      .then(response => {
+        dispatch(creatingBoxCompleted(response));
+      }, eventerror => {
+        dispatch(creatingBoxCompleted({ error: eventerror }, true));
+        const error = new Error('Impossible to insert Box' +
+                                `Cause: ${eventerror.message || eventerror}`);
+        error.error = eventerror;
+        throw error;
+      });
+  };
+}
+
+/*
 export function searchEvents(criteria) {
   return {
     type: SEARCH_EVENTS,
@@ -117,3 +160,5 @@ export function searchEventsRemote(criteria) {
       });
   };
 }
+ */
+

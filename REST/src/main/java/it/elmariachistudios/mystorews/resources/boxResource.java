@@ -54,9 +54,12 @@ public class boxResource {
     ) {
         final List<StoreBox> result;
         result = storeboxDao.findAllBoxes();
+        
+        /*
         for (StoreBox box: result) {
             box.setItemList(itemDao.findAllItemByBox(box.getId()));
         }
+        */
         
         LOG.info("getBoxes()" + formatUserData(request));
         
@@ -74,8 +77,10 @@ public class boxResource {
             @Context HttpServletRequest request,
             @NotNull @Valid StoreBox box
     ) {
+        final int sqlQueryResult;
         final StoreBox result;
-        result = storeboxDao.createBox(box);
+        sqlQueryResult = storeboxDao.createBox(box);
+        result = storeboxDao.findBoxById(sqlQueryResult);
         
         LOG.info("createBoxes()" + formatUserData(request));
         

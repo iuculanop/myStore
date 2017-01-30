@@ -10,24 +10,33 @@ import it.elmariachistudios.mystorews.model.StoreBox;
 import java.util.List;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 /**
  *
  * @author Paolo Iuculano <paolo.iuculano@unimi.it>
  */
 
-
+@RegisterMapper(StoreBoxMapper.class)
 public interface StoreBoxDAO {
     public void close();
     
-    @SqlQuery("select * from box where name= :name")
+    @SqlQuery("select * from StoreBox where name= :name")
     StoreBox findBoxByName(@Bind("name") String name);
     
-    @SqlQuery("select * from box")
+    @SqlQuery("select * from StoreBox where box_id= :id")
+    StoreBox findBoxById(@Bind("id") int id);
+    
+    @SqlQuery("select * from StoreBox")
     List<StoreBox> findAllBoxes();
     
-    @SqlUpdate("insert into box (name,location,weight,total_items) values (:name,:location,:totalWeight,:totalItems)")
-    StoreBox createBox(@BindBean StoreBox b);
+    @SqlUpdate("insert into StoreBox ( "
+            + "name,location,weight_status,space_status,isFragile,height,width,depth) "
+            + "values "
+            + "(:name,:location,:weightStatus,:spaceStatus,:isFragile,:height,:width,:depth)")
+    @GetGeneratedKeys
+    public int createBox(@BindBean StoreBox b);
 }

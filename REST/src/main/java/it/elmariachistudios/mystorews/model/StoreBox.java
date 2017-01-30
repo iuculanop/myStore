@@ -21,9 +21,9 @@ public class StoreBox {
     
     @JsonProperty("id")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private int id;
+    private Integer id;
     @JsonProperty("idFather")
-    private int idFather;
+    private Integer idFather;
     @JsonProperty("name")
     private String name;
     @JsonProperty("location")
@@ -34,9 +34,11 @@ public class StoreBox {
     private String spaceStatus;
     @JsonProperty("isFragile")
     private boolean isFragile;
-    
+    @JsonProperty("height")
     private double height;
+    @JsonProperty("width")
     private double width;
+    @JsonProperty("depth")
     private double depth;
     
     private List<Item> items;
@@ -50,7 +52,10 @@ public class StoreBox {
             @JsonProperty("location") String location,
             @JsonProperty("weightStatus") String weightStatus,
             @JsonProperty("spaceStatus") String spaceStatus,
-            @JsonProperty("isFragile") boolean isFragile
+            @JsonProperty("isFragile") boolean isFragile,
+            @JsonProperty("height") double height,
+            @JsonProperty("width") double width,
+            @JsonProperty("depth") double depth
             ) {
         this.id = id;
         this.idFather = idFather;
@@ -59,6 +64,9 @@ public class StoreBox {
         this.weightStatus = weightStatus;
         this.spaceStatus = spaceStatus;
         this.isFragile = isFragile;
+        this.height = height;
+        this.width = width;
+        this.depth = depth;
     }
     
     public StoreBox(int idFather, String name, String location, int height, int width, int depth) {
@@ -83,7 +91,7 @@ public class StoreBox {
         this.depth = depth;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -91,7 +99,7 @@ public class StoreBox {
         this.id = id;
     }
 
-    public int getIdFather() {
+    public Integer getIdFather() {
         return idFather;
     }
 

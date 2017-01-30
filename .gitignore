@@ -4,3 +4,4 @@ npm-debug.log
 #Ignore those folders
 node_modules
 dist
+REST/logs

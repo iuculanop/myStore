@@ -13,6 +13,11 @@ body {
   margin-bottom: 10px; 
 }
 
+.vmg10 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .mg5 {
   margin-left: 5px;
   margin-right: 5px;
@@ -65,4 +70,8 @@ body {
 
 .ant-layout-sider-collapsed .nav-text {
   display: none;
+}
+
+th.header-centered {
+  text-align: center !important;
 }

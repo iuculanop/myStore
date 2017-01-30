@@ -11,6 +11,9 @@ import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import it.elmariachistudios.mystorews.conf.myStoreConf;
+import it.elmariachistudios.mystorews.persistance.ItemDAO;
+import it.elmariachistudios.mystorews.persistance.StoreBoxDAO;
+import it.elmariachistudios.mystorews.resources.boxResource;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +66,9 @@ public class myStoreApp extends Application<myStoreConf>{
         //initialize db connections
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(e, t.getDataSourceFactory(), "mysql");
-        //TODO: INIZIALIZZARE DAOS
+        //initialize daos
+        final StoreBoxDAO storeboxDao = jdbi.onDemand(StoreBoxDAO.class);
+        final ItemDAO itemDao = jdbi.onDemand(ItemDAO.class);
         
         // abilita la generazione del wadl (url http://localhost:9000/application.wadl ad esempio)
         // poichè vengono esposti i nomi dei metodi che vengono erogati, verificare se non sia meglio disabilitarne la generazione
@@ -72,6 +77,7 @@ public class myStoreApp extends Application<myStoreConf>{
         e.jersey().getResourceConfig().addProperties(properties);
         
         // Inizializza le risorse del WS
+        e.jersey().register(new boxResource(storeboxDao,itemDao));
         
         // Inizializza i task del WS
 

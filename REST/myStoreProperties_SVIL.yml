@@ -1,0 +1,79 @@
+## YAML Template.
+# File configurazione con parametri jdbc per Oracle
+
+timezone: Europe/Rome
+
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  password: s8s8tif8
+  url: jdbc:mysql://localhost:3306/mystoreWS?zeroDateTimeBehavior=convertToNull
+
+  properties:
+    charSet: UTF-8
+    useUnicode: true
+    characterEncoding: UTF8
+    characterSetResults: UTF8
+    connectionCollation: UTF8_GENERAL_CI
+    useTimezone: true
+    serverTimezone: UTC
+    MaxPooledStatements: 250
+    hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    # validate | update | create | create-drop
+    hibernate.hbm2ddl.auto: validate
+  validationQuery: "/* Health Check */ SELECT 1"
+  checkConnectionWhileIdle: true
+  checkConnectionOnReturn: true
+  maxWaitForConnection: 5s
+  initialSize: 8 # numero di connessioni aperte all'avvio
+  minSize: 8
+  maxSize: 24 # numero di connessioni massimo
+
+  # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing
+  evictionInterval: 10s  
+  # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
+  minIdleTime: 1 minute
+  
+server:
+# softNofileLimit: 1000
+# hardNofileLimit: 1000
+  requestLog:
+    type: classic
+    timeZone: Europe/Rome
+    appenders:
+      - type: console
+  applicationConnectors:
+    - type: http
+      port: 9000
+  # type: https
+  # port: 8443
+  # keyStorePath: avvisiserver.keystore
+  # keyStorePassword: avvisiserver
+  # validateCerts: false
+
+  adminConnectors:
+    - type: http
+      port: 9001
+  # type: https
+  # port: 8444
+  # keyStorePath: avvisiserver.keystore
+  #keyStorePassword: avvisiserver
+  # validateCerts: false
+
+# Logging settings.
+logging:
+# The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: DEBUG
+# Logger-specific levels.
+  loggers:
+# Sets the level for 'it.elmariachistudios.mystoreWS.app' to DEBUG.
+    it.elmariachistudios.mystoreWS.app: DEBUG
+  appenders:
+    - type: console
+    
+    - type: file
+      threshold: DEBUG
+      currentLogFilename: ./logs/mystoreWS_debug.log
+      archivedLogFilenamePattern: ./logs/mystoreWS_debug-%d.log.gz
+      archivedFileCount: 5
+
