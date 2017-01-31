@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { FETCH_BOXES,
          FETCH_BOXES_COMPLETED,
          FETCH_BOX,
@@ -38,7 +39,26 @@ const boxes = (state = initialState, action) => {
         loading: false,
       };
     case CREATE_BOX:
+      return {
+        ...state,
+        loading: true,
+      };
     case CREATE_BOX_COMPLETED:
+      {
+        if (action.error) {
+          return {
+            ...state,
+            loading: false,
+          };
+        }
+        const newBoxes = _.cloneDeep(state.boxes);
+        newBoxes.push(action.payload);
+        return {
+          ...state,
+          boxes: newBoxes,
+          loading: false,
+        };
+      }
     default:
       return state;
   }

@@ -11,6 +11,7 @@ function BoxesTable({ boxes }) {
     <Table
       bordered
       dataSource={boxes}
+      rowKey="id"
     >
       <Column
         title="Name"
