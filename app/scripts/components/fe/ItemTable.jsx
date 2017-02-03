@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Row, Col, Table } from 'antd';
-import BoxesActions from 'containers/fe/ReduxBoxesActions.jsx';
+import ItemActions from 'containers/fe/ReduxItemActions.jsx';
 
 const { Column, ColumnGroup } = Table;
 
@@ -19,7 +19,7 @@ function ItemTable({ items }) {
           <div id="no-results">No items found!</div>
         </Col>
         <Col span={4}>
-          <BoxesActions />
+          <ItemActions />
         </Col>
       </Row>
     );

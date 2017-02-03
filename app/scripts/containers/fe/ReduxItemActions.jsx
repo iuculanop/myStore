@@ -2,13 +2,13 @@ import { connect } from 'react-redux';
 import { createItem } from 'actions/';
 
 // import presentational components here
-import BoxesActions from 'components/fe/BoxesActions.jsx';
+import ItemActions from 'components/fe/ItemActions.jsx';
 
 // importing data from the state
 function mapStateToProps(state) {
   return {
     box: state.boxesInfo.box,
-    items: state.itemsInfo.item,
+    items: state.itemsInfo.items,
   };
 }
 
@@ -20,6 +20,6 @@ const mapDispatchToProps = (dispatch) => ({
 const ReduxItemActions = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(BoxesActions);
+)(ItemActions);
 
 export default ReduxItemActions;
