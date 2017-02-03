@@ -68,6 +68,25 @@ public class itemResource {
         
     }
     
+    @GET
+    @Path("/{id}")
+    @Timed
+    @Valid
+    public Response getItem(
+            @PathParam("id") Integer idItem,
+            @Context HttpServletRequest request
+    ) {
+        final Item result;
+        result = itemDao.findItemById(idItem);
+                        
+        LOG.info("getItem()" + formatUserData(request));
+        
+        itemDao.close();
+        
+        return ResponseUtils.buildResponse(result);
+        
+    }
+    
     @POST
     @Path("/create")
     @Timed

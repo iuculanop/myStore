@@ -72,7 +72,7 @@ public class boxResource {
     @Path("/{id}")
     @Timed
     @Valid
-    public Response getBoxes(
+    public Response getBox(
             @PathParam("id") Integer idBox,
             @Context HttpServletRequest request
     ) {
@@ -81,7 +81,7 @@ public class boxResource {
         
         result.setItemList(itemDao.findAllItemByBox(result.getId()));
                         
-        LOG.info("getBoxes()" + formatUserData(request));
+        LOG.info("getBox()" + formatUserData(request));
         
         storeboxDao.close();
         
