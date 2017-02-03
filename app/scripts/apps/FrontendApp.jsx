@@ -3,7 +3,7 @@ import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { menuLink } from 'util/NavigationUtils.jsx';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 // import usrImg from 'images/icon-user.png';
 
@@ -23,7 +23,7 @@ class FrontendApp extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout style={{ height: '100%' }}>
         <Sider
           trigger={null}
           collapsible
@@ -56,6 +56,9 @@ class FrontendApp extends React.Component {
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
             <div>{this.props.children}</div>
           </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            myStore ©2016 Created by ElMariachi Studios
+          </Footer>
         </Layout>
       </Layout>
     );

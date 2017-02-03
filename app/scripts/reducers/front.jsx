@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import boxes from './boxes.jsx';
+import boxesInfo from './boxes.jsx';
+import itemsInfo from './items.jsx';
 
 const rootReducer = combineReducers({
-  boxes,
+  boxesInfo,
+  itemsInfo,
   routing: routerReducer,
 });
 

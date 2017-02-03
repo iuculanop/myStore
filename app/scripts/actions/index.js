@@ -1,5 +1,6 @@
 // import { retrieveEvent, retrieveEvents } from 'util/RetrieveEvents.jsx';
-import { retrieveBoxes, insertBox } from 'util/Ajax/boxes.jsx';
+import { retrieveBoxes, retrieveBox, insertBox } from 'util/Ajax/boxes.jsx';
+import { retrieveItems, retrieveItem, insertItem } from 'util/Ajax/items.jsx';
 
 /* servira in futuro quando si fara la ricerca su dati gia caricati
 export const SEARCH_EVENTS = 'SEARCH_EVENTS';
@@ -15,6 +16,15 @@ export const FETCH_BOX_COMPLETED = 'FETCH_BOX_COMPLETED';
 
 export const CREATE_BOX = 'CREATE_BOX';
 export const CREATE_BOX_COMPLETED = 'CREATE_BOX_COMPLETED';
+
+export const FETCH_ITEMS = 'FETCH_ITEMS';
+export const FETCH_ITEMS_COMPLETED = 'FETCH_ITEMS_COMPLETED';
+
+export const FETCH_ITEM = 'FETCH_ITEM';
+export const FETCH_ITEM_COMPLETED = 'FETCH_ITEM_COMPLETED';
+
+export const CREATE_ITEM = 'CREATE_ITEM';
+export const CREATE_ITEM_COMPLETED = 'CREATE_ITEM_COMPLETED';
 
 export function fetchingBoxes() {
   return {
@@ -46,6 +56,36 @@ export function fetchBoxes() {
   };
 }
 
+export function fetchingBox() {
+  return {
+    type: FETCH_BOX,
+  };
+}
+
+export function fetchingBoxCompleted(box, error = false) {
+  return {
+    type: FETCH_BOX_COMPLETED,
+    payload: box,
+    error,
+  };
+}
+
+export function fetchBox(id) {
+  return (dispatch) => {
+    dispatch(fetchingBox());
+    return retrieveBox(id)
+      .then(response => {
+        dispatch(fetchingBoxCompleted(response));
+      }, eventerror => {
+        dispatch(fetchingBoxCompleted({ error: eventerror }, true));
+        const error = new Error('Impossible to fetch Boxes' +
+                                `Cause: ${eventerror.message || eventerror}`);
+        error.error = eventerror;
+        throw error;
+      });
+  };
+}
+
 export function creatingBox() {
   return {
     type: CREATE_BOX,
@@ -69,6 +109,108 @@ export function createBox(box) {
       }, eventerror => {
         dispatch(creatingBoxCompleted({ error: eventerror }, true));
         const error = new Error('Impossible to insert Box' +
+                                `Cause: ${eventerror.message || eventerror}`);
+        error.error = eventerror;
+        throw error;
+      });
+  };
+}
+
+export function fetchingItems() {
+  return {
+    type: FETCH_ITEMS,
+  };
+}
+
+export function fetchingItemsCompleted(items, error = false) {
+  return {
+    type: FETCH_ITEMS_COMPLETED,
+    payload: items,
+    error,
+  };
+}
+
+export function fetchItems() {
+  return (dispatch) => {
+    dispatch(fetchingItems());
+    return retrieveItems()
+      .then(response => {
+        dispatch(fetchingItemsCompleted(response));
+      }, eventerror => {
+        dispatch(fetchingItemsCompleted({ error: eventerror }, true));
+        const error = new Error('Impossible to fetch Items' +
+                                `Cause: ${eventerror.message || eventerror}`);
+        error.error = eventerror;
+        throw error;
+      });
+  };
+}
+
+export function fetchingItem() {
+  return {
+    type: FETCH_ITEM,
+  };
+}
+
+export function fetchingItemCompleted(item, error = false) {
+  return {
+    type: FETCH_ITEM_COMPLETED,
+    payload: item,
+    error,
+  };
+}
+
+export function fetchItem(id) {
+  return (dispatch) => {
+    dispatch(fetchingItem());
+    return retrieveItem(id)
+      .then(response => {
+        dispatch(fetchingItemsCompleted(response));
+      }, eventerror => {
+        dispatch(fetchingItemsCompleted({ error: eventerror }, true));
+        const error = new Error('Impossible to fetch Items' +
+                                `Cause: ${eventerror.message || eventerror}`);
+        error.error = eventerror;
+        throw error;
+      });
+  };
+}
+
+export function creatingItem() {
+  return {
+    type: CREATE_ITEM,
+  };
+}
+
+export function creatingItemCompleted(item, error = false) {
+  return {
+    type: CREATE_ITEM_COMPLETED,
+    payload: item,
+    error,
+  };
+}
+
+export function createItem(item) {
+  return (dispatch) => {
+    dispatch(creatingItem());
+    return insertItem(item)
+      .then(response => {
+        dispatch(creatingItemCompleted(response));
+        if (item.storedBox && item.storedBox !== null) {
+          return retrieveBox(item.storedBox)
+            .then(response2 => dispatch(fetchingBoxCompleted(response2)),
+                  eventerror => {
+                    dispatch(fetchingBoxCompleted({ error: eventerror }, true));
+                    const error = new Error('Impossible to fetch Boxes' +
+                                            `Cause: ${eventerror.message || eventerror}`);
+                    error.error = eventerror;
+                    throw error;
+                  });
+        }
+        return 0;
+      }, eventerror => {
+        dispatch(creatingItemCompleted({ error: eventerror }, true));
+        const error = new Error('Impossible to insert Item' +
                                 `Cause: ${eventerror.message || eventerror}`);
         error.error = eventerror;
         throw error;

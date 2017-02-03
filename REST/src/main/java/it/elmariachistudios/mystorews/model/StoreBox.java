@@ -40,7 +40,7 @@ public class StoreBox {
     private double width;
     @JsonProperty("depth")
     private double depth;
-    
+    @JsonProperty("items")
     private List<Item> items;
     private List<StoreBox> boxes;
 
@@ -55,7 +55,8 @@ public class StoreBox {
             @JsonProperty("isFragile") boolean isFragile,
             @JsonProperty("height") double height,
             @JsonProperty("width") double width,
-            @JsonProperty("depth") double depth
+            @JsonProperty("depth") double depth,
+            @JsonProperty("items") List<Item> items
             ) {
         this.id = id;
         this.idFather = idFather;
@@ -67,6 +68,7 @@ public class StoreBox {
         this.height = height;
         this.width = width;
         this.depth = depth;
+        this.items = items;
     }
     
     public StoreBox(int idFather, String name, String location, int height, int width, int depth) {

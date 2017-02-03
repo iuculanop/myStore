@@ -7,7 +7,7 @@ import BoxesActions from 'components/fe/BoxesActions.jsx';
 // importing data from the state
 function mapStateToProps(state) {
   return {
-    boxes: state.boxes.boxes,
+    boxes: state.boxesInfo.boxes,
   };
 }
 
@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
   onInsertBox: (box) => dispatch(createBox(box)),
 });
 
-const ReduxBoxesTable = connect(
+const ReduxBoxesActions = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(BoxesActions);
 
-export default ReduxBoxesTable;
+export default ReduxBoxesActions;

@@ -4,7 +4,7 @@ import AddBox from 'components/modal/AddBox.jsx';
 function BoxesActions({ boxes, onInsertBox }) {
   console.log(boxes);
   return (
-    <div>
+    <div className="to-right">
       <AddBox onInsertBox={onInsertBox} />
     </div>
   );

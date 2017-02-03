@@ -57,6 +57,7 @@ class AddBox extends React.Component {
     return (
       <div>
         <Button
+          title="Aggiungi scatola"
           type="primary"
           shape="circle"
           icon="plus"
@@ -65,6 +66,7 @@ class AddBox extends React.Component {
         <Modal
           title="Aggiungi scatola"
           visible={this.state.isOpen}
+          maskClosable={false}
           onOk={this.onOk}
           onCancel={this.onCancel}
           okText="Salva"

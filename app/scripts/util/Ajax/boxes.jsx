@@ -25,5 +25,12 @@ export function insertBox(box) {
   );
 }
 
-// export function retrieveBox(id) {}
+export function retrieveBox(id) {
+  return (
+    fetch(`${mystoreWS}/boxes/${id}`)
+      .then(checkStatus)
+      .then(parseJSON)
+      .then((response) => response)
+  );
+}
 

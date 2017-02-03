@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Form, Input, InputNumber, Select } from 'antd';
+import { validateSize } from 'util/Validators.jsx';
 
 function onChange(value) {
   console.log('changed', value);
@@ -41,9 +42,7 @@ const AddBoxForm = Form.create()(
           <Col span={4} offset={2}>
             <FormItem label="Altezza">
               {getFieldDecorator('height', {
-                rules: [{ required: true,
-                           message: 'Si prega di inserire l\'altezza!',
-                }],
+                rules: [{ required: true, validator: validateSize }],
                 initialValue: '0',
               })(
                 <InputNumber min={0} step={0.5} onChange={onChange} />
@@ -53,9 +52,7 @@ const AddBoxForm = Form.create()(
           <Col span={4} offset={4}>
             <FormItem label="Larghezza">
               {getFieldDecorator('width', {
-                rules: [{ required: true,
-                           message: 'Si prega di inserire la larghezza!',
-                }],
+                rules: [{ required: true, validator: validateSize }],
                 initialValue: '0',
               })(
                 <InputNumber min={0} step={0.5} onChange={onChange} />
@@ -65,9 +62,7 @@ const AddBoxForm = Form.create()(
           <Col span={4} offset={4}>
             <FormItem label="Profondità">
               {getFieldDecorator('depth', {
-                rules: [{ required: true,
-                           message: 'Si prega di inserire la profondità!',
-                }],
+                rules: [{ required: true, validator: validateSize }],
                 initialValue: '0',
               })(
                 <InputNumber min={0} step={0.5} onChange={onChange} />
@@ -82,10 +77,8 @@ const AddBoxForm = Form.create()(
                 rules: [{ required: true,
                            message: 'Si prega di indicare la pesantezza!',
                 }],
-                initialValue: '0',
               })(
-                <Select>
-                  <Option value="0">Seleziona</Option>
+                <Select placeholder="Seleziona lo stato">
                   <Option value="1">Leggera</Option>
                   <Option value="2">Pesante</Option>
                 </Select>
@@ -98,10 +91,8 @@ const AddBoxForm = Form.create()(
                 rules: [{ required: true,
                            message: 'Si prega di indicare la capacità disponibile!',
                 }],
-                initialValue: '0',
               })(
-                <Select>
-                  <Option value="0">Seleziona</Option>
+                <Select placeholder="Seleziona lo stato">
                   <Option value="1">Vuota</Option>
                   <Option value="2">Spazio disponibile</Option>
                   <Option value="3">Piena</Option>

@@ -14,6 +14,7 @@ import it.elmariachistudios.mystorews.conf.myStoreConf;
 import it.elmariachistudios.mystorews.persistance.ItemDAO;
 import it.elmariachistudios.mystorews.persistance.StoreBoxDAO;
 import it.elmariachistudios.mystorews.resources.boxResource;
+import it.elmariachistudios.mystorews.resources.itemResource;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -78,6 +79,7 @@ public class myStoreApp extends Application<myStoreConf>{
         
         // Inizializza le risorse del WS
         e.jersey().register(new boxResource(storeboxDao,itemDao));
+        e.jersey().register(new itemResource(itemDao));
         
         // Inizializza i task del WS
 

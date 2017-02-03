@@ -23,6 +23,10 @@ body {
   margin-right: 5px;
 }
 
+.to-right {
+  float: right;
+}
+
 .profile-photo {
   height: 160px;
 }
@@ -74,4 +78,8 @@ body {
 
 th.header-centered {
   text-align: center !important;
+}
+
+#app {
+  height: 100%;
 }

@@ -10,6 +10,7 @@ import it.elmariachistudios.mystorews.model.Item;
 import java.util.List;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -23,16 +24,17 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 public interface ItemDAO {
     public void close();
             
-    @SqlQuery("select * from item")
-    @RegisterMapper(ItemMapper.class)
+    @SqlQuery("select * from Item")
     List<Item> findAllItem();
     
-    @SqlQuery("select * from item where storedinbox= :boxID")
-    @RegisterMapper(ItemMapper.class)
+    @SqlQuery("select * from Item where id = :itemId")
+    Item findItemById(@Bind("itemId") int itemId);
+    
+    @SqlQuery("select * from Item where storedBox= :boxID")
     List<Item> findAllItemByBox(@Bind("boxID") int boxID);
     
-    @SqlUpdate("insert into item (name,description,weight,storedinbox) values (:name,:description,:weight,:storedinBox)")
-    @RegisterMapper(ItemMapper.class)
-    void createItem(@BindBean Item s);
+    @SqlUpdate("insert into Item (name,description,weight,storedBox) values (:name,:description,:weight,:storedinBox)")
+    @GetGeneratedKeys
+    public int createItem(@BindBean Item s);
     
 }

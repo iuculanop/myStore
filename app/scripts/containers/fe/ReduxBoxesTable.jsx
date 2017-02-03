@@ -6,8 +6,8 @@ import BoxesTable from 'components/fe/BoxesTable.jsx';
 // importing data from the state
 function mapStateToProps(state) {
   return {
-    boxes: state.boxes.boxes,
-    isLoading: state.boxes.loading,
+    boxes: state.boxesInfo.boxes,
+    isLoading: state.boxesInfo.loading,
   };
 }
 
